@@ -8,13 +8,33 @@ editor: visual
 ---
 
 ```{r}
-install.packages("argparse")
-library("argparse")
-cli_text("The data comes from {.href [World Bank](https://data.worldbank.org/indicator/EN.ATM.CO2E.KT?view=chart)}")
 
-dir.create("data")
-unzip(zipfile = "data/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_4770619.zip", exdir = "data")
+library(htmltools)
+link_text <- "The data comes from World Bank"
+url <- "https://data.worldbank.org/indicator/EN.ATM.CO2E.KT?view=chart"
+hyperlink <- tags$a(href = url, target = "_blank", link_text)
+html_print(hyperlink)
+```
 
+```{r, warning=FALSE}
 library(readr)
-CO2_emission <- read_csv("data/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_4770619.csv")
+CO2_emission <- read_csv("data/CO2_emission.csv", show_col_types = FALSE)
+Country_Code <- read.csv("data/Country_API.csv")
+INDICATOR_CODE <- read.csv("data/Indicator_API.csv")
+```
+
+```{r}
+#Plot 1
+```
+
+```{r}
+#Plot 2
+```
+
+```{r}
+#Plot 3
+```
+
+```{r}
+#Plot 4
 ```
