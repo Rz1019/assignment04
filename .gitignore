@@ -1,3 +1,4 @@
-*.csv
-*.xlsx
-*.sas7bdat
+/data/CO2_emission.csv
+/data/Country_API.csv
+/data/Indicator_API.csv
+
