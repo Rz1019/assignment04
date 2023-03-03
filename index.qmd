@@ -1,0 +1,20 @@
+---
+title: "Assignment04"
+author: "Ruining Zheng & Yixuan Li"
+format:
+  html: 
+    self-contained: true
+editor: visual
+---
+
+```{r}
+install.packages("argparse")
+library("argparse")
+cli_text("The data comes from {.href [World Bank](https://data.worldbank.org/indicator/EN.ATM.CO2E.KT?view=chart)}")
+
+dir.create("data")
+unzip(zipfile = "data/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_4770619.zip", exdir = "data")
+
+library(readr)
+CO2_emission <- read_csv("data/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_4770619.csv")
+```
