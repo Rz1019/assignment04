@@ -25,7 +25,8 @@ INDICATOR_CODE <- read.csv("data/Indicator_API.csv")
 ```
 
 ```{r}
-#Plot 1
+# Plot 1
+library(tidyverse)
 year_amount <- CO2_emission %>%
   select(- Country_Code & - Indicator_Code & - Indicator_Name) %>%
   select(- matches("19[6-8]\\d")) %>%
@@ -48,7 +49,22 @@ ggplot() +
 ```
 
 ```{r}
-#Plot 2
+# Plot 2
+# We want to plot the emission amount percentage of China, France, Russia, United States and the UK in 2018.
+library(tidyverse)
+perminant_member <- CO2_emission %>%
+  select(Country_Name, "2018") %>%
+  filter(Country_Name == "Russian Federation" | Country_Name == "United States" | Country_Name == "United Kingdom" | Country_Name == "China" | Country_Name == "France") %>%
+  rename(Amount = "2018")
+
+perminant_member %>%
+ggplot() +
+  geom_col(mapping = aes(x = Country_Name, y = Amount, fill = Country_Name)) + 
+  xlab("Perminant members") +
+  ylab("Emission Amount in 2018") +
+  labs(title = "CO2 Emisison Amount of Five Perminant Members in the UN Security Council in 2018")
+  
+
 ```
 
 ```{r}
