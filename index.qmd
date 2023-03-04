@@ -18,6 +18,7 @@ html_print(hyperlink)
 
 ```{r, warning=FALSE}
 library(readr)
+library(tidyverse)
 CO2_emission <- read_csv("data/CO2_emission.csv", show_col_types = FALSE)
 Country_Code <- read.csv("data/Country_API.csv")
 INDICATOR_CODE <- read.csv("data/Indicator_API.csv")
@@ -25,6 +26,25 @@ INDICATOR_CODE <- read.csv("data/Indicator_API.csv")
 
 ```{r}
 #Plot 1
+year_amount <- CO2_emission %>%
+  select(- Country_Code & - Indicator_Code & - Indicator_Name) %>%
+  select(- matches("19[6-8]\\d")) %>%
+  select(- "2021" & - "2020") %>%
+  pivot_longer(
+    cols = c("1990":"2019"),
+    names_to = "Year",
+    values_to = "Amount"
+  ) %>%
+  filter(Country_Name == "Total")
+ 
+library(ggplot2)
+year_amount %>%
+ggplot() +
+  geom_point(mapping = aes(x = Year, y = Amount)) +
+  xlab("Year (from 1990-2019)") +
+  ylab("Total Emission Amount")+
+  labs(title = "Yearly CO2 Emission Amount from 1990 to 2019")
+  
 ```
 
 ```{r}
