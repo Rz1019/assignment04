@@ -36,12 +36,12 @@ year_amount <- CO2_emission %>%
     names_to = "Year",
     values_to = "Amount"
   ) %>%
-  filter(Country_Name == "Total")
+  filter(Country_Name == "World")
  
-library(ggplot2)
 year_amount %>%
 ggplot() +
-  geom_point(mapping = aes(x = Year, y = Amount)) +
+  geom_point(mapping = aes(x = Year, y = Amount, size = Amount), alpha = 0.2) +
+  scale_x_discrete(expand = c(0.01, 0.05)) +
   xlab("Year (from 1990-2019)") +
   ylab("Total Emission Amount")+
   labs(title = "Yearly CO2 Emission Amount from 1990 to 2019")
@@ -52,25 +52,57 @@ ggplot() +
 # Plot 2
 # We want to plot the emission amount percentage of China, France, Russia, United States and the UK in 2018.
 library(tidyverse)
-perminant_member <- CO2_emission %>%
+permanent_member <- CO2_emission %>%
   select(Country_Name, "2018") %>%
   filter(Country_Name == "Russian Federation" | Country_Name == "United States" | Country_Name == "United Kingdom" | Country_Name == "China" | Country_Name == "France") %>%
   rename(Amount = "2018")
 
-perminant_member %>%
+permanent_member %>%
 ggplot() +
   geom_col(mapping = aes(x = Country_Name, y = Amount, fill = Country_Name)) + 
   xlab("Perminant members") +
   ylab("Emission Amount in 2018") +
-  labs(title = "CO2 Emisison Amount of Five Perminant Members in the UN Security Council in 2018")
+  labs(title = "CO2 Emisison Amount of Five Permanent Members in the UN Security Council in 2018")
   
 
 ```
 
 ```{r}
-#Plot 3
+# Plot 3
+# We want to plot the emission percentage of the permanent members and other countries in 2018. 
+Others_2018 <- CO2_emission %>%
+  select(Country_Name, "2018") %>%
+  rename(Amount = "2018") %>%
+  filter(Country_Name != "Russian Federation" & Country_Name != "United States" & Country_Name != "United Kingdom" & Country_Name != "China" & Country_Name != "France" & Country_Name != "World") %>%
+  summarise(sum(N = Amount, na.rm = TRUE))
+# The sum is 590584795 based on code above. Then create a new df with this sum.
+Others_2018_total <- Others_2018 %>%
+  data.frame(Country_Name = c("Others"), Amount = 590584795)
+combined_df <- bind_rows(
+  permanent_member, Others_2018_total
+) 
+permanent_member %>%
+  ggplot(aes(x = Country_Name, y = Amount, color = Country_Name, fill = Country_Name)) +
+  geom_bar(stat = "identity")+
+  coord_polar(theta = "y")
 ```
 
 ```{r}
 #Plot 4
+# We plot the emission amount in China from 2009 to 2019
+China <- CO2_emission %>%
+  filter(Country_Name == "China") %>%
+  select(- Country_Code & - Indicator_Code & - Indicator_Name) %>%
+  select(- matches("19[6-9]\\d")) %>%
+  select(- "2021" & - "2020") %>%
+  pivot_longer(
+    cols = c("2000":"2019"),
+    names_to = "Year",
+    values_to = "Amount"
+  )
+
+China %>%
+  ggplot() +
+  geom_line(mapping = aes(x = Year, y = Amount,  group = 1)) +
+  geom_point(mapping = aes(x = Year, y = Amount))
 ```
