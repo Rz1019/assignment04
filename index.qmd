@@ -48,6 +48,8 @@ ggplot() +
   
 ```
 
+The first graph shows that overall, the Yearly CO2 Emission Amount all over the world is increasing from 1990 to 2019. The height of the points clearly shows this pattern, and the size of the points also represents the change in emission amount. When in 1990, about 30 billion of CO2 is emitted worldwide, leading to a very small point symbol. After 30 years of world-changing, when in 2019, about 35 billion of CO2 is emitted worldwide, leading to a large point symbol. Besides, the colors of the points change gradually from red to purple and then back to red, which shows the gradually increasing of emission levels around the world. This graph explains how CO2 emissions have increased around the globe over the past years. If we compare it with the creation time of some innovative technologies, we may find some information about how to reduce CO2 emissions by technology innovations.
+
 ```{r}
 # Plot 2
 # We plot the emission amount in China from 2009 to 2019
@@ -73,6 +75,8 @@ China %>%
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+The second graph shows that overall, the yearly CO2 Emission Amount in China is increasing from 2000 to 2019. Each point represents the emission level of a year separately, as shown by the height of each point. When in 2000, about 3.2 billion of CO2 is emitted in China. And after 20 years of economic development, when in 2019, about 10.6 billion of CO2 is emitted in China. Besides, the colors of points are generally changing from black to blue, representing the amount increasing; the shape of points also matters because different shapes mean that yearly emission amounts are in different intervals. Since Fossil Fuel Vehicles produce an important percentage of CO2 emissions in China, the decrease in emissions levels may be closely related to policies about Fossil Fuel Vehicles. Emission increases may be caused by tax policies that reduce taxes in purchasing fossil fuel vehicles, and emissions decreases may be caused by environmental protection policies that are about the phase-out of fossil fuel cars.
+
 ```{r}
 # Plot 3
 # We want to plot the emission amount percentage of China, France, Russia, United States and the UK in 2018.
@@ -93,6 +97,8 @@ ggplot() +
   
 
 ```
+
+This graph shows the Co2 emission amount of five United Nation Security Council in 2018. Among these five nations, China and Russia are still developing countries, and have powerful production industries. China produced as twice as the US emitted in 2018, more than 10 billion kt. China has a rapid developing economy in recent years; though it is still a devveloping countries, it still need to look for efficient means to reduce the greenhouse gas as soon as possible. If China can succeed in controling its pollution issue, it releases a signal to other developing countries to encourage them participate in managing pollution issues.
 
 ```{r, warning=FALSE}
 # Plot 4
@@ -125,3 +131,5 @@ combined_df %>%
   ylab("Emission Percentage in 2018") +
   labs(title = "Comparing Permanent Members' Percentage of Emission with Others")
 ```
+
+The five permanent members accounted for about 3% of the total emission in 2018, while the percentage of China and the US emission is more than 2.5%. From the graph, we can conclude that European developed countries have gained success in emission reduction. They can share their experiences and provide support to developing countries to help them produce more efficiently and environmental friendly. International organizations can also take a role in this process to distribute resources and funding more comprehensively. Due to the priority of economy development in developing countries, they really need international organizations and developed countries to support them to pay attention to Co2 emission issue.
